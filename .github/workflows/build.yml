@@ -74,6 +74,8 @@ jobs:
       - name: Pre-build setup Windows
         if: matrix.os == 'windows-latest'
         run: |
+          mkdir "D:\\Temp"
+          echo "TEMP=D:\\Temp" >> $env:GITHUB_ENV
           echo "keystorepass=${KEYSTORE_PASS}" >> gradle.properties
           git fetch --no-tags https://$GITHUB_TOKEN@github.com/spotbugs/spotbugs.git +refs/heads/master:refs/remotes/origin/master
           if ( "$GPG_SECRET_PASSPHRASE" -ne "" ) {
