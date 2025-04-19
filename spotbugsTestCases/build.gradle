@@ -67,6 +67,8 @@ tasks.named('javadoc', Javadoc).configure {
   }
 }
 
+tasks.spotbugsMain.enabled = false
+
 def classesJava8 = tasks.register('classesJava8', JavaCompile) {
   destinationDirectory.set(layout.buildDirectory.dir("classes/java/java8"))
   classpath = sourceSets.main.compileClasspath
