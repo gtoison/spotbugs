@@ -19,6 +19,8 @@
 package edu.umd.cs.findbugs.detect;
 
 import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.JavaClass;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
@@ -57,6 +59,16 @@ public abstract class AbstractAssertDetector extends OpcodeStackDetector {
         if (seen == Const.NEW && getClassConstantOperand().equals("java/lang/AssertionError")) {
             inAssert = false;
         }
+    }
+    
+    @Override
+    public void visitAfter(Code obj) {
+        inAssert = false;
+    }
+    
+    @Override
+    public void visitAfter(JavaClass obj) {
+        inAssert = false;
     }
 
     protected void reportBug(BugInstance bug) {
