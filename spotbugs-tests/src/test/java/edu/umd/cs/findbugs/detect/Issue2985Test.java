@@ -7,8 +7,11 @@ class Issue2985Test extends AbstractIntegrationTest {
 
     @Test
     void testIssue() {
-        performAnalysis("ghIssues/Issue2985.class");
+        performAnalysis("ghIssues/Issue2985.class",
+                "ghIssues/Issue2985$NonStaticFactoryMethod.class",
+                "ghIssues/Issue2985$PublicConstructor.class");
 
-        assertBugTypeCount("SING_SINGLETON_IMPLEMENTS_SERIALIZABLE", 0);
+        assertBugInClassCount("SING_SINGLETON_IMPLEMENTS_SERIALIZABLE", "ghIssues.Issue2985$NonStaticFactoryMethod", 0);
+        assertBugInClassCount("SING_SINGLETON_IMPLEMENTS_SERIALIZABLE", "ghIssues.Issue2985$PublicConstructor", 0);
     }
 }
