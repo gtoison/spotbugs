@@ -51,6 +51,7 @@ import edu.umd.cs.findbugs.ba.ch.Subtypes2;
 import edu.umd.cs.findbugs.ba.interproc.PropertyDatabase;
 import edu.umd.cs.findbugs.ba.interproc.PropertyDatabaseFormatException;
 import edu.umd.cs.findbugs.ba.jsr305.DirectlyRelevantTypeQualifiersDatabase;
+import edu.umd.cs.findbugs.ba.npe.MethodContractDatabase;
 import edu.umd.cs.findbugs.ba.npe.ParameterNullnessPropertyDatabase;
 import edu.umd.cs.findbugs.ba.npe.ReturnValueNullnessPropertyDatabase;
 import edu.umd.cs.findbugs.ba.npe.TypeQualifierNullnessAnnotationDatabase;
@@ -102,9 +103,13 @@ public class AnalysisContext implements AutoCloseable {
 
     public static final String NONNULL_RETURN_DB_FILENAME = "nonnullReturn.db";
 
+    public static final String METHOD_CONTRACTS_DB_FILENAME = "methodContracts.db";
+
     public static final String UNCONDITIONAL_DEREF_DB_RESOURCE = "jdkBaseUnconditionalDeref.db";
 
     public static final String NONNULL_RETURN_DB_RESOURCE = "jdkBaseNonnullReturn.db";
+
+    public static final String METHOD_CONTRACTS_DB_RESOURCE = "jdkBaseMethodContracts.db";
 
     public static final String DEFAULT_NULL_RETURN_VALUE_DB_FILENAME = "mayReturnNull.db";
 
@@ -586,6 +591,8 @@ public class AnalysisContext implements AutoCloseable {
         loadPropertyDatabase(getUnconditionalDerefParamDatabase(), UNCONDITIONAL_DEREF_DB_FILENAME,
                 "unconditional param deref database");
         loadPropertyDatabase(getReturnValueNullnessPropertyDatabase(), NONNULL_RETURN_DB_FILENAME, "nonnull return db database");
+        loadPropertyDatabase(getMethodContractDatabase(), METHOD_CONTRACTS_DB_FILENAME,
+                "covariant parameter nullness return db database");
     }
 
     /**
@@ -601,6 +608,8 @@ public class AnalysisContext implements AutoCloseable {
                 "unconditional param deref database");
         loadPropertyDatabaseFromResource(getReturnValueNullnessPropertyDatabase(), NONNULL_RETURN_DB_RESOURCE,
                 "nonnull return db database");
+        loadPropertyDatabaseFromResource(getMethodContractDatabase(), METHOD_CONTRACTS_DB_RESOURCE,
+                "covariant parameter nullness return db database");
     }
 
     /**
@@ -1018,6 +1027,15 @@ public class AnalysisContext implements AutoCloseable {
      */
     public ReturnValueNullnessPropertyDatabase getReturnValueNullnessPropertyDatabase() {
         return getDatabase(ReturnValueNullnessPropertyDatabase.class);
+    }
+
+    /**
+     * Get the property database recording the method contracts
+     *
+     * @return the database, or null if there is no database available
+     */
+    public MethodContractDatabase getMethodContractDatabase() {
+        return getDatabase(MethodContractDatabase.class);
     }
 
     /**

@@ -20,9 +20,12 @@
 package edu.umd.cs.findbugs.util;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import java.util.stream.Collectors;
 
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -302,4 +305,7 @@ public class Strings {
         return s;
     }
 
+    public static <T> String join(String delimiter, Collection<T> values, Function<T, String> converter) {
+        return String.join(delimiter, values.stream().map(converter).collect(Collectors.toList()));
+    }
 }
