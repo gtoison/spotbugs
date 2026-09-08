@@ -19,6 +19,7 @@ Currently the versioning policy of this project follows [Semantic Versioning v2.
 - Fix `OBL_UNSATISFIED_OBLIGATION` false negatives for unclosed `CallableStatement`s returned by `Connection.prepareCall` ([#4148](https://github.com/spotbugs/spotbugs/issues/4148))
 - Fix `LI_LAZY_INIT_STATIC` false negative when field is lazily initialized using a method call ([#4276](https://github.com/spotbugs/spotbugs/issues/4276))
 - Fix SARIF output writing source-location URI syntax exceptions to stderr when source filenames are unknown ([#1412](https://github.com/spotbugs/spotbugs/issues/1412))
+- Narrow the definition of singletons ([#2985](https://github.com/spotbugs/spotbugs/issues/2985))
 
 ## 4.10.4 - 2026-08-19
 ### Fixed
@@ -99,7 +100,6 @@ Currently the versioning policy of this project follows [Semantic Versioning v2.
 - Recognize well-known exception-throwing utility methods when looking for exceptions thrown from constructors ([#3821](https://github.com/spotbugs/spotbugs/issues/3821))
 - Fix `RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE` false negative when non-null value is on the left side of null comparison ([#3920](https://github.com/spotbugs/spotbugs/issues/3920))
 - Fix `IM_BAD_CHECK_FOR_ODD` false negative when using Yoda-style comparison (`1 == i % 2`) ([#3886](https://github.com/spotbugs/spotbugs/issues/3886))
-- Narrow the definition of singletons ([#2985](https://github.com/spotbugs/spotbugs/issues/2985))
 - Fix `PluginLoader.close()` to continue closing all `URLClassLoader`s when one close operation fails, suppressing subsequent `IOException`s. ([#3958](https://github.com/spotbugs/spotbugs/pull/3958))
 - Fix broken `bugDescriptions.html#TYPE` links by restoring legacy bug type anchors in generated docs ([#2113](https://github.com/spotbugs/spotbugs/issues/2113))
 - Fix `EI_EXPOSE_REP` false negative in package-private classes that expose mutable state through methods overriding a public super-type ([#4027](https://github.com/spotbugs/spotbugs/pull/4027))
